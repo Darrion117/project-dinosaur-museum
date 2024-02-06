@@ -21,8 +21,51 @@ const exampleDinosaurData = require("../data/dinosaurs");
  * EXAMPLE:
  *  getLongestDinosaur(dinosaurs);
  *  //> { Brachiosaurus: 98.43 }
+ * 
+ * P.E.D.A.C
+P - process the problem - get the longest Dinosaurs and convert from meters to feet, multiply the meters by `3.281`.
+E - example { Brachiosaurus: 98.43 }
+D -  Data Types - array of obj, that contains key values
+A - Algorithm - 
+1. intialized longestdion to index 0  of dinosaurs
+2. do a for loop for dino of dinosaurs/ bc its an array so you need to loop through 
+   to access 
+3. if dino lengthinmeters greater than longestdino length in meters 
+4. make longestDino dino/ in this case dino = var // of only gets the element 
+/// NOW CONVERT METERS INTO FEET ///
+5. initialize lengthInFeet to be longestdino lengthinmeters times 3.281
+6. intialize result as an empty object 
+7. lengthinfeet result array keying leongestdino's name // key pair values / which also intialize as an Object 
+8. Return result // what are we returning 
+9. return an empty object = {}
  */
-function getLongestDinosaur(dinosaurs) {}
+function getLongestDinosaur(dinosaurs) {
+ if(dinosaurs.length === 0){
+  return {}
+ }
+  let longestDino = dinosaurs[0];
+  for (let dino of dinosaurs) {
+    if (dino.lengthInMeters > longestDino.lengthInMeters) {
+      longestDino = dino;
+    }
+  }
+  let lengthInFeet = longestDino.lengthInMeters * 3.281;
+  let result = {};
+  result[longestDino.name]  = lengthInFeet;
+  return result;
+}
+
+// function getLongestDinosaur(dinosaurs) {
+//     let sortDino = dinosaurs.sort((a,b) => a.lengthInMeters - b.lengthInMeters);
+//     let longestDino = sortDino[sortDino.length -1];
+//     const{ name, lengthInMeters } = longestDino 
+//     let lengthInFeet = lengthInMeters * 3.281;
+//     return `{${name}: ${lengthInFeet}} `
+   
+//   }
+  
+  console.log(getLongestDinosaur(exampleDinosaurData))
+  
 
 /**
  * getDinosaurDescription()
@@ -44,7 +87,14 @@ function getLongestDinosaur(dinosaurs) {}
  *  getDinosaurDescription(dinosaurs, "incorrect-id");
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
-function getDinosaurDescription(dinosaurs, id) {}
+function getDinosaurDescription(dinosaurs, id) {
+  for(let dinoObj of dinosaurs){
+      if(dinoObj.dinosaurId === id ){
+          return 'had horns and a bony frill with elaborate ornamentation of projections, knobs, and spikes'
+      }
+  }
+  return "A dinosaur with an ID of 'incorrect-id' cannot be found."
+}
 
 /**
  * getDinosaursAliveMya()
@@ -71,7 +121,32 @@ function getDinosaurDescription(dinosaurs, id) {}
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-function getDinosaursAliveMya(dinosaurs, mya, key) {}
+function getDinosaursAliveMya(dinosaurs, mya, key) {
+  let arr = []; 
+  
+  for (let dino of dinosaurs) {
+      let oneDateBool = dino.mya.length === 1 && (dino.mya[0] === mya || dino.mya[0] - 1 === mya);
+      let twoDatesBool = dino.mya.length === 2 && mya >= dino.mya[1] && mya <= dino.mya[0];
+      
+      if (oneDateBool) {
+        pushToArray(arr, key, dino)
+      } 
+      else if (twoDatesBool) {
+        pushToArray(arr, key, dino)
+      }
+  }
+  return arr;
+}
+
+/// Helper Function
+function pushToArray(arr, key, dino){
+  if (!key || !(key in dino)) {
+    arr.push(dino.dinosaurId);
+   } 
+  else {
+    arr.push(dino[key]);
+   }
+}
 
 module.exports = {
   getLongestDinosaur,

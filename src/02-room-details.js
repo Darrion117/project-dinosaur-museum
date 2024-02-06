@@ -25,7 +25,33 @@ const exampleRoomData = require("../data/rooms");
  *  getRoomByDinosaurName(dinosaurs, rooms, "Pterodactyl");
  *  //> "Dinosaur with name 'Pterodactyl' cannot be found."
  */
-function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {}
+function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
+  const dinoObj = dinosaurs.find(dino => dino.name === dinosaurName);   
+  if(!dino){  
+    return  `Dinosaur with name '${dinosaurName}' cannot be found.`; 
+    const room = rooms.find(r => r.dinosaurs.includes(dinosaurName));
+  if (room) {
+    return room.name;
+    } else {
+    return `Dinosaur with name '${dinosaurName}' cannot be found in any room.`;
+   }  
+  }
+}
+
+// Find the dinosaur in the dinosaurs array  
+// the ! is saying if not then return the error messegae that we want to give 
+//  now i need to find the room where the dinosaur can be found
+/**
+      * in this line of code i made a varablie that goes into the Object rooms named rooms, using the array method find( )
+       which is a method returns the value of the first element in an array that pass the test in a testing function.
+     */ 
+  // If the room is found, return its name
+/**
+ *   the function first checks if the dinosaur exists in the dinosaurs array and then looks for the room 
+ * containing that dinosaur in the rooms array. It returns either the room name or an error message.
+ */
+
+
 
 /**
  * getConnectedRoomNamesById()
